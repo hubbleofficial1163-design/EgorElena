@@ -48,26 +48,25 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-.map-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 15px;
-    padding: 8px 16px;
-    background-color: rgba(135, 157, 144, 0.85);
-    border: none;
-    border-radius: 30px;
-    color: white;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    font-weight: 500;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
+// Музыка
+const musicBtn = document.getElementById('musicBtn');
+const music = document.getElementById('weddingMusic');
+const musicBtnText = document.getElementById('musicBtnText');
+let isPlaying = false;
 
-.map-btn:hover {
-    background-color: #637257;
-    transform: translateY(-2px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+if (musicBtn && music) {
+    musicBtn.addEventListener('click', function() {
+        if (isPlaying) {
+            music.pause();
+            musicBtnText.textContent = 'Включить музыку';
+            musicBtn.classList.remove('playing');
+        } else {
+            music.play().catch(error => {
+                console.log('Автозапрет браузера:', error);
+            });
+            musicBtnText.textContent = 'Выключить музыку';
+            musicBtn.classList.add('playing');
+        }
+        isPlaying = !isPlaying;
+    });
 }
